@@ -9,6 +9,10 @@ public interface Generate {
     void generate();
 
     default List<String> read(String path) throws IOException {
-        return Files.readAllLines(Paths.get(path));
+        return Files.readAllLines(Paths.get(path))
+                .stream()
+                .filter(s -> !s.isEmpty())
+                .distinct()
+                .toList();
     }
 }
